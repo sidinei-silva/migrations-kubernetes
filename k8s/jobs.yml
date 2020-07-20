@@ -1,11 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: db-migrate-
+  name: db-migrate
 spec:
+  backoffLimit: 0
   template:
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: Never
       containers:
       - name: db-migrate
         image: registry.digitalocean.com/app-um/app-um-image
