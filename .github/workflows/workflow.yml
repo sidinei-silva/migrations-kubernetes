@@ -34,11 +34,17 @@ jobs:
     - name: Save DigitalOcean kubeconfig
       run: doctl kubernetes cluster kubeconfig save teste-kubernetes
 
-    - name: Deploy to DigitalOcean Kubernetes
-      run: kubectl apply -f $GITHUB_WORKSPACE/k8s/manifest.yml
+    - name: Deploy Deployments to DigitalOcean Kubernetes
+      run: kubectl apply -f $GITHUB_WORKSPACE/k8s/deployments.yml
 
     - name: Status deployment
       run: kubectl rollout status deployment/app-um-deployment
+
+    - name: Deploy Services to DigitalOcean Kubernetes
+      run: kubectl apply -f $GITHUB_WORKSPACE/k8s/services.yml
+
+    - name: Deploy Jobs to DigitalOcean Kubernetes
+      run: kubectl apply -f $GITHUB_WORKSPACE/k8s/jobs.yml
 
     - name: Update deployment
       run: kubectl rollout restart deployment/app-um-deployment

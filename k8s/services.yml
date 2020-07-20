@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-um-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-um-deployment
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3333
