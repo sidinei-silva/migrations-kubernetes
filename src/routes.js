@@ -5,7 +5,7 @@ const routes = new Router();
 routes.get('/', (req, res) => {
   const env_teste = process.env.HELLO_ENV ?? '';
   res.json({
-    message: 'Teste sem job, com livenessProbe',
+    message: 'Retornando Job, retirando livreProbed',
     env: env_teste,
   });
 });
