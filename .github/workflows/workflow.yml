@@ -38,7 +38,7 @@ jobs:
       run: kubectl apply -f $GITHUB_WORKSPACE/k8s/deployments.yml
 
     - name: Status deployment
-      run: kubectl rollout status -w --timeout=60s deployment/app-um-deployment
+      run: kubectl rollout status -w --timeout=3m deployment/app-um-deployment
 
     - name: Deploy Services to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/k8s/services.yml

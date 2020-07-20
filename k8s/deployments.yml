@@ -20,6 +20,7 @@ spec:
       containers:
       - name: app-um-container
         image: registry.digitalocean.com/app-um/app-um-image
+        command: ['yarn', 'migrate']
         imagePullPolicy: Always
         ports:
           - containerPort: 3333
@@ -32,13 +33,6 @@ spec:
           httpGet:
             path: /
             port: 3333
-        livenessProbe:
-          exec:
-            command:
-            - yarn
-            - migrate
-          initialDelaySeconds: 5
-          periodSeconds: 10
         env:
         - name: HELLO_ENV
           valueFrom:
