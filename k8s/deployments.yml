@@ -32,6 +32,13 @@ spec:
           httpGet:
             path: /
             port: 3333
+        livenessProbe:
+          exec:
+            command:
+            - yarn
+            - migrate
+          initialDelaySeconds: 5
+          periodSeconds: 10
         env:
         - name: HELLO_ENV
           valueFrom:
