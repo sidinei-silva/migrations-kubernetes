@@ -5,8 +5,6 @@ metadata:
 spec:
   template:
     spec:
-      failedJobsHistoryLimit: 3
-      successfulJobsHistoryLimit: 0
       restartPolicy: Never
       containers:
       - name: db-migrate
@@ -22,7 +20,7 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: app-env-configs
+              name: app-env-config
               key: DB_HOST
         - name: DB_PORT
           valueFrom:
