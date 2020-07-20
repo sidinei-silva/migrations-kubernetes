@@ -103,7 +103,6 @@ metadata:
 spec:
   activeDeadlineSeconds: 60
   template:
-    name: db-migrate
     spec:
       containers:
       - name: db-migrate
