@@ -5,7 +5,7 @@ const routes = new Router();
 routes.get('/', (req, res) => {
   const env_teste = process.env.HELLO_ENV ?? '';
   res.json({
-    message: 'Testando migration no dockerfile 2, ok',
+    message: 'Job com init container tudo ok',
     env: env_teste,
   });
 });

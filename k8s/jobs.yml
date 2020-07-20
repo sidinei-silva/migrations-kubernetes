@@ -1,0 +1,102 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+spec:
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: db-migrate
+        image: registry.digitalocean.com/app-um/app-um-image
+        imagePullPolicy: Always
+        env:
+        - name: DB_CONNECTION
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_CONNECTION
+
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_PORT
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_USER
+        - name: DB_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_PASS
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_NAME
+        - name: TIME_ZONE
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: TIME_ZONE
+        command: ["yarn",  "migrate"]
+      imagePullSecrets:
+      - name: registry-app-um
+
+      initContainers:
+
+      - name: teste-deployment
+      image: registry.digitalocean.com/app-um/app-um-image
+      imagePullPolicy: Always
+      env:
+        - name: HELLO_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: HELLO_ENV
+        - name: DB_CONNECTION
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_CONNECTION
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_PORT
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_USER
+        - name: DB_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_PASS
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_NAME
+        - name: TIME_ZONE
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: TIME_ZONE
+
+

@@ -34,6 +34,12 @@ jobs:
     - name: Save DigitalOcean kubeconfig
       run: doctl kubernetes cluster kubeconfig save teste-kubernetes
 
+    - name: Deploy Jobs to DigitalOcean Kubernetes
+      run: kubectl apply -f $GITHUB_WORKSPACE/k8s/jobs.yml
+
+    - name: Verify job is completed
+      run: kubectl wait --for=condition=complete --timeout=30s job/db-migrate
+
     - name: Deploy Deployments to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/k8s/deployments.yml
 
