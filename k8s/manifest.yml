@@ -37,13 +37,77 @@ spec:
         image: registry.digitalocean.com/app-um/app-um-image
         imagePullPolicy: Always
         env:
+
         - name: HELLO_ENV
           valueFrom:
             configMapKeyRef:
               name: app-env-config
               key: HELLO_ENV
+
+        - name: DB_CONNECTION
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_CONNECTION
+
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_HOST
+
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_PORT
+
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_USER
+
+        - name: DB_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_PASS
+
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: DB_NAME
+
+        - name: TIME_ZONE
+          valueFrom:
+            configMapKeyRef:
+              name: app-env-config
+              key: TIME_ZONE
         ports:
           - containerPort: 3333
             protocol: TCP
       imagePullSecrets:
       - name: registry-app-um
+
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  activeDeadlineSeconds: 60
+  template:
+    name: db-migrate
+    spec:
+      containers:
+      - name: db-migrate
+        image: registry.digitalocean.com/app-um/app-um-image
+        command: ["yarn",  "migrate"]
+      restartPolicy: Never
+  backoffLimit: 4
