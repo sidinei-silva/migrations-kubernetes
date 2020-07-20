@@ -43,8 +43,5 @@ jobs:
     - name: Deploy Services to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/k8s/services.yml
 
-    - name: Deploy Jobs to DigitalOcean Kubernetes
-      run: kubectl apply -f $GITHUB_WORKSPACE/k8s/jobs.yml
-
     - name: Update deployment
       run: kubectl rollout restart deployment/app-um-deployment

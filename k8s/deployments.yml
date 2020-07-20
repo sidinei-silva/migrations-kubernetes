@@ -27,11 +27,18 @@ spec:
         readinessProbe:
           periodSeconds: 15
           timeoutSeconds: 2
-          successThreshold: 4
-          failureThreshold: 4
+          successThreshold: 2
+          failureThreshold: 2
           httpGet:
             path: /
             port: 3333
+        livenessProbe:
+          exec:
+            command:
+            - yarn
+            - migrate
+          initialDelaySeconds: 5
+          periodSeconds: 10
         env:
         - name: HELLO_ENV
           valueFrom:
