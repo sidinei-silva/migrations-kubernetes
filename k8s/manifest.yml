@@ -36,6 +36,17 @@ spec:
       - name: app-um-container
         image: registry.digitalocean.com/app-um/app-um-image
         imagePullPolicy: Always
+        ports:
+          - containerPort: 3333
+            protocol: TCP
+        readinessProbe:
+          periodSeconds: 15
+          timeoutSeconds: 2
+          successThreshold: 4
+          failureThreshold: 4
+          httpGet:
+            path: /
+            port: 3333
         env:
         - name: HELLO_ENV
           valueFrom:
@@ -47,7 +58,6 @@ spec:
             configMapKeyRef:
               name: app-env-config
               key: DB_CONNECTION
-
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
@@ -78,9 +88,7 @@ spec:
             configMapKeyRef:
               name: app-env-config
               key: TIME_ZONE
-        ports:
-          - containerPort: 3333
-            protocol: TCP
+
       imagePullSecrets:
       - name: registry-app-um
 
