@@ -5,7 +5,7 @@ metadata:
 spec:
   template:
     spec:
-      restartPolicy: Never
+      restartPolicy: OnFailure
       containers:
       - name: db-migrate
         image: registry.digitalocean.com/app-um/app-um-image
@@ -16,7 +16,6 @@ spec:
             configMapKeyRef:
               name: app-env-config
               key: DB_CONNECTION
-
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
