@@ -19,4 +19,4 @@ EXPOSE 3333
 
 RUN yarn build
 
-CMD ["yarn", "migrate", "&&", "yarn", "start:production"]
+CMD ["yarn", "start:production"]
