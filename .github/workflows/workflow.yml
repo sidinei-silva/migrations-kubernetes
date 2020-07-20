@@ -35,7 +35,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig save teste-kubernetes
 
     - name: Remove old job
-      run: kubectl describe job/db-migrate
+      run: kubectl delete job/db-migrate
 
     - name: Deploy Jobs to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/k8s/jobs.yml
