@@ -20,7 +20,6 @@ spec:
       containers:
       - name: app-um-container
         image: registry.digitalocean.com/app-um/app-um-image
-        command: ['yarn', 'migrate']
         imagePullPolicy: Always
         ports:
           - containerPort: 3333
