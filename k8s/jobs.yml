@@ -3,6 +3,9 @@ kind: Job
 metadata:
   name: db-migrate
 spec:
+  activeDeadlineSeconds: 60
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 0
   template:
     spec:
       restartPolicy: Never
@@ -20,7 +23,7 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: app-env-config
+              name: app-env-configs
               key: DB_HOST
         - name: DB_PORT
           valueFrom:
@@ -30,7 +33,7 @@ spec:
         - name: DB_USER
           valueFrom:
             configMapKeyRef:
-              name: apps-env-config
+              name: app-env-config
               key: DB_USER
         - name: DB_PASS
           valueFrom:
