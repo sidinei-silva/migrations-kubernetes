@@ -40,6 +40,10 @@ jobs:
     - name: Verify job is completed
       run: kubectl wait --for=condition=complete --timeout=60s job/db-migrate
 
+    - name: Imprimindo error em log
+      if: ${{ failure() }}
+      run: kubectl logs $(kubectl get pods --selector=job-name=db-migrate --output=jsonpath='{.items[*].metadata.name}')
+
     - name: Deploy Deployments to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/k8s/deployments.yml
 
