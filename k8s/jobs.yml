@@ -15,15 +15,10 @@ spec:
         image: registry.digitalocean.com/app-um/app-um-image
         imagePullPolicy: Always
         env:
-        - name: HELLO_ENV
-          valueFrom:
-            configMapKeyRef:
-              name: app-env-config
-              key: HELLO_ENV
         - name: DB_CONNECTION
           valueFrom:
             configMapKeyRef:
-              name: app-env-config
+              name: app-env-configs
               key: DB_CONNECTION
 
         - name: DB_HOST

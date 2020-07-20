@@ -4,7 +4,10 @@ const routes = new Router();
 
 routes.get('/', (req, res) => {
   const env_teste = process.env.HELLO_ENV ?? '';
-  res.json({ message: 'Testando Job Ok e Deployment Fails', env: env_teste });
+  res.json({
+    message: 'Testando Job Fails e Deployment Ok',
+    env: env_teste,
+  });
 });
 
 export default routes;

@@ -46,7 +46,7 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: app-env-configs
+              name: app-env-config
               key: DB_HOST
         - name: DB_PORT
           valueFrom:
