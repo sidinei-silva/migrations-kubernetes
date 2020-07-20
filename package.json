@@ -7,7 +7,8 @@
   "scripts": {
     "start:development": "nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "start:production": "node dist/server.js"
+    "start:production": "node dist/server.js",
+    "migrate": "sequelize-cli db:migrate"
   },
   "dependencies": {
     "cors": "^2.8.5",
