@@ -3,7 +3,6 @@ kind: Job
 metadata:
   name: db-migrate
 spec:
-  activeDeadlineSeconds: 60
   template:
     spec:
       restartPolicy: Never
