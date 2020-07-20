@@ -63,7 +63,7 @@ spec:
         - name: DB_USER
           valueFrom:
             configMapKeyRef:
-              name: app-env-config
+              name: app-env-configa
               key: DB_USER
         - name: DB_PASS
           valueFrom:
