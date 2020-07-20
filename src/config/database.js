@@ -17,6 +17,10 @@ module.exports = {
   },
 
   dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
     useUTC: false, // for reading from database
   },
   timezone: '-03:00', // for writing to database
